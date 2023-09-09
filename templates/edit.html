@@ -1,0 +1,53 @@
+{% extends 'menu.html' %}
+
+{% block body %}
+<div class="card card-body">
+    <form action="/add_script" method="POST">
+    <label for="selOperativo">Sistema Operativo:</label>
+        <select name="selOperativo" id="selOperativo">
+            {% for lSo in listSo %}
+	 		    <option value="{{ lSo.0 }}">{{ lSo.1 }}</option>
+            {% endfor %}
+		</select>
+        <label for="txtCodigo">Código:</label>
+        <input type="text" name="txtCodigo" id="txtCodigo">
+        <label for="txtNombre">Nombre:</label>
+        <input type="text" name="txtNombre" id="txtNombre">
+        <label for="txtDescribe">Desdcripción:</label>
+        <input type="text" name="txtDescribe" id="txtDescribe">
+        <button class="btn btn-primary btn-block">
+            Save
+          </button>
+
+    </form>
+</div>
+
+<p>&nbsp;</p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">S. Operativo</th>
+      <th scope="col">Código</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for script in scripts %}
+    <tr class="table-active">
+      <th scope="row">{{ script.0 }}</th>
+      <td>{{ script.1 }}</td>
+      <td>{{ script.2 }}</td>
+      <td>{{ script.3 }}</td>
+      <td>
+          <a href="/edit/{{script.1}}" class="btn btn-secondary">edit</a>
+          <a href="/delete/{{script.1}}" class="btn btn-danger btn-delete">delete</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
