@@ -1,0 +1,56 @@
+{% extends 'menu.html' %}
+
+{% block body %}
+<div class="card card-body">
+    <form action="/upscript/{{scdata.1}}" method="POST">
+    <label for="selOperativo">Sistema Operativo:</label>
+        <select name="selOperativo">
+            {% for lSo in listSo %}
+            {% if  scdata.0 == lSo.0 %}
+	 		    <option value="{{ lSo.0 }}" selected>{{ lSo.1 }}</option>
+            {% else %}
+                <option value="{{ lSo.0 }}">{{ lSo.1 }}</option>
+            {% endif %}
+            {% endfor %}
+		</select>
+        <label for="txtCodigo">Código:</label>
+        <input type="text" name="txtCodigo" value="{{ scdata.1 }}">
+        <label for="txtNombre">Nombre:</label>
+        <input type="text" name="txtNombre" value="{{ scdata.2}}">
+        <label for="txtDescribe">Desdcripción:</label>
+        <input type="text" name="txtDescribe" value="{{ scdata.3 }}">
+        <button class="btn btn-primary btn-block">
+            Update
+          </button>
+    </form>
+</div>
+
+<p>&nbsp;</p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">S. Operativo</th>
+      <th scope="col">Código</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for script in scripts %}
+    <tr class="table-active">
+      <th scope="row">{{ script.0 }}</th>
+      <td>{{ script.1 }}</td>
+      <td>{{ script.2 }}</td>
+      <td>{{ script.3 }}</td>
+      <td>
+          <a href="/edscript/{{script.1}}" class="btn btn-secondary">edit</a>
+          <a href="/delscript/{{script.1}}" class="btn btn-danger btn-delete">delete</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'menu.html' %}
+
+{% block body %}
+<div class="container text-center">
+<table border="0" align="center">
+<tr>
+    <td>
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+          <div class="card-body">
+            <h4 class="card-title">{{ cser|length }} Servidores</h4>
+            <p class="card-text">      Servidores Monitoreados      </p>
+          </div>
+        </div>
+    </td>
+    <td>
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+          <div class="card-body">
+            <h4 class="card-title">2 Servicios</h4>
+            <p class="card-text">      Servicios Monitoreados      </p>
+          </div>
+        </div>
+    </td>
+    <td>
+        <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+          <div class="card-body">
+            <h4 class="card-title">{{ destado[0][1] }} Críticos</h4>
+            <p class="card-text">      Servicios en Estado Critico      </p>
+          </div>
+        </div>
+    </td>
+    <td>
+        <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+          <div class="card-body">
+            <h4 class="card-title">{{ destado[2][1] }} Warning</h4>
+            <p class="card-text">      Servicios en Estado Alarmados      </p>
+          </div>
+        </div>
+    </td>
+</tr>
+</table>
+</div>
+
+
+<p>&nbsp;</p>
+<table class="table table-hover">
+  <thead>
+	  <tr>
+	    <th>Servidor</th>
+	    <th>Servicio</th>
+	    <th>Estado</th>
+		<th>Descripción</th>
+	  </tr>
+  </thead>
+  <tbody>
+  {% for dboard in dboards %}
+      {% if dboard.2 == 'W' %}
+	    <tr class="table-warning">
+      {% elif dboard.2 == 'C' %}
+        <tr class="table-danger">
+      {% else %}
+        <tr class="table-success">
+      {% endif %}
+        <td scope="row">{{ dboard.0 }}</td>
+        <td>{{ dboard.1 }}</td>
+        <td>{{ dboard.2 }}</td>
+        <td>{{ dboard.3 }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+    function autoRefresh() {
+        window.location = window.location.href;
+    }
+    setInterval('autoRefresh()', 5000);
+</script>
+{% endblock %}

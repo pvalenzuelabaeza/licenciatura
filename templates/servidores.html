@@ -1,0 +1,51 @@
+{% extends 'menu.html' %}
+
+{% block body %}
+
+  <div class="card card-body">
+    <form>
+        <label for="selOperativo">Sistema Operativo:</label>
+        <select name="selOperativo" id="selOperativo">
+            {% for lSo in listSo %}
+	 		    <option value="{{ lSo.0 }}">{{ lSo.1 }}</option>
+            {% endfor %}
+		</select>
+      <label for="txtIP">IP:</label><input type="text" name="txtIP" id="txtIP">
+      <label for="txtWarning">Warning</label><input type="text" name="txtWarning" id="txtWarning">
+      <label for="txtCritico">Crítico</label><input type="text" name="txtCritico" id="txtCritico">
+      <label for="txtNombre">Nombre:</label><input type="text" name="txtNombre" id="txtNombre">
+        <button class="btn btn-primary btn-block">
+            Save
+        </button>
+</form>
+</div>
+<p>&nbsp;</p>
+
+<table class="table table-hover">
+  <thead>
+	  <tr>
+      <th scope="col">S.Operativo</th>
+      <th scope="col">IP</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Warning</th>
+      <th scope="col">Critical</th>
+      <th scope="col">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for server in servers %}
+	  <tr class="table-active">
+        <th scope="row">{{ server.0 }}</td>
+        <td>{{ server.1 }}</td>
+        <td>{{ server.2 }}</td>
+        <td>{{ server.3 }}</td>
+        <td>{{ server.4 }}</td>
+        <td>
+          <a href="#" class="btn btn-secondary">edit</a>
+          <a href="#" class="btn btn-danger btn-delete">delete</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
